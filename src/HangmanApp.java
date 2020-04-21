@@ -29,7 +29,7 @@ public class HangmanApp {
 		String letters = "";
 		char currentLetter;
 		
-		String word[] = {"Bahamas", "Bahrain", "Barbados", "Brunei", "Cape Verde", "Comoros", "Cuba",
+		String word[] = {"Bahamas", "Bahrain", "Barbados", "Brunei", "Comoros", "Cuba",
 				"Cyprus", "Dominica", "Fiji", "Haiti", "Iceland", "Jamaica", "Japan", "Madagascar", 
 				"Maldives", " Malta", "Mauritius", "Philippines",
 				"Seychelles", "Singapore", "Taiwan", "Tonga", "Vanuatu"};
@@ -102,7 +102,7 @@ public class HangmanApp {
 			//convert the word to char Array and check if the letter is in the word
 				char[] showLettersInTheWord = starWord.toCharArray();
 				for(char i=0; i<showLettersInTheWord.length; i++) {
-					if(word[randomWord].charAt(i) == currentLetter) {
+					if(Character.toLowerCase(word[randomWord].charAt(i)) == currentLetter) {
 						showLettersInTheWord[i] = currentLetter;
 						newLetter = true;
 					}
@@ -117,7 +117,7 @@ public class HangmanApp {
 /** >>>> deleted boolean with changed value <<<<< */
 			    //if there are still *** in the word the game is not finished
 				for (char i=0; i<word[randomWord].length(); i++) {
-					if (word[randomWord].charAt(i) == '*') {
+					if (Character.toLowerCase(word[randomWord].charAt(i)) == '*') {
 						gameFinished = true;
 						} 
 					}
@@ -131,7 +131,7 @@ public class HangmanApp {
 
 /** >>>> added parameters <<<<< */
 						
-					}else if (lives>0 || gameFinished){
+					}else if (lives>0 && gameFinished){
 						gamesWon++;
 						System.out.println("Congratulations! The word was: " + word[randomWord]);
 					}
@@ -145,8 +145,8 @@ public class HangmanApp {
 			agree = sc.next().toLowerCase();
 
 		
-		} while (agree.contentEquals("yes"));	
-	   if (agree.equals("no")) {
+		} while (agree.equalsIgnoreCase("yes"));	
+	   if (agree.equalsIgnoreCase("no")) {
 			System.out.println("Thank you for the game!");
 			System.out.println();}
 	
