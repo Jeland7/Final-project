@@ -67,7 +67,8 @@ public class HangmanApp {
 			System.out.println("Word: " + starWord);
 			System.out.println("Lives: " + lives);
 			System.out.println("Used letters: ");
-			
+
+/** >>>> added getter <<<<< */		
 			if (myHang.getLength() == 0) {
 				System.out.println(" no letters used yet");
 				System.out.println();
