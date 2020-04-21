@@ -100,7 +100,7 @@ public class HangmanApp {
 
 /** >>>> made correction from starWord.charAt(i) to word[randomWord].charAt(i) <<<<< */
 			//convert the word to char Array and check if the letter is in the word
-				char[] showLettersInTheWord = word[randomWord].toCharArray();
+				char[] showLettersInTheWord = starWord.toCharArray();
 				for(char i=0; i<showLettersInTheWord.length; i++) {
 					if(word[randomWord].charAt(i) == currentLetter) {
 						showLettersInTheWord[i] = currentLetter;
