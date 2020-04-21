@@ -128,12 +128,11 @@ public class HangmanApp {
 						gamesLost++;
 						System.out.println("GAME OVER! The word was: " + word[randomWord]);
 						System.out.println();
-
-/** >>>> added parameters <<<<< */
 						
-					}else if (lives>0 && gameFinished){
+					}else if (lives > 0 && !gameFinished) {
 						gamesWon++;
 						System.out.println("Congratulations! The word was: " + word[randomWord]);
+						System.out.println();
 					}
 					//show statistics
 					System.out.println("Statistics: ");
