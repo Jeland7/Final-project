@@ -38,6 +38,13 @@ public class HangmanLetters {
 	}return sb.toString();
 	}
 	
+	/**>>>> added getter method for length<<<<<*/
+	
+	//getter
+	public int getLength() {
+		return letters.length();
+	}
+	
 	//method to show letters which were used
 	public void showUsedLetters() {
 		for (char i = 0; i < letters.length(); i++) {
@@ -45,24 +52,27 @@ public class HangmanLetters {
 		}
 	}
 	
+	//method to check if letter has been used
+			public boolean letterWasUsed(char letter) {
+			for(char i = 0; i < letters.length(); i++) {
+				if (letters.charAt(i) == letter) {
+					return true;
+				}
+			}
+				return false;
+			}
+	
 	//method to add a letter to the line of used letters
 	public void usedLettersLine(char nextLetter) {
 		letters = letters + nextLetter;
 		char[] lettersArray = letters.toCharArray();
 		letters = String.copyValueOf(lettersArray);
 		
+		
 	}
 
 	
-	//check if letter has been used
-		public boolean letterWasUsed(char letter) {
-			for(char i = 0; i < letters.length(); i++) {
-				if (letters.charAt(i) == letter) {
-					return true;
-				}
-			}
-			return false;
-		}
+	
 	
 	
 }//end class

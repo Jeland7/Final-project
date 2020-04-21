@@ -58,6 +58,7 @@ public class HangmanApp {
 	    //convert letters to ***
 	    starWord = myHang.convertStars(word[randomWord]);					
 	    
+	    
 	    //declare amount of lives
 		lives = 8;
 		boolean gameFinished = false;
@@ -67,37 +68,40 @@ public class HangmanApp {
 			System.out.println("Lives: " + lives);
 			System.out.println("Used letters: ");
 			
-			if (letters.length() == 0) {
+			if (myHang.getLength() == 0) {
 				System.out.println(" no letters used yet");
 				System.out.println();
 				
 			}else {
 				myHang.showUsedLetters();
-				System.out.println();
+				
 			}
 		 
 			currentLetter = ' '; 
 			boolean usedLetter = false;
 			
 			do {
+				
 				if (usedLetter) {
 					System.out.println("The letter " + "<<" + currentLetter + ">>"+ " was used!");
 				}
-			
-			//ask the user to guess a letter
+				
+				//ask the user to guess a letter
 				System.out.println("Guess a letter: ");
 				currentLetter = sc.next().charAt(0);
 			
-			//check if letter was used
-				usedLetter = myHang.letterWasUsed(currentLetter);
-					
+				//check if letter was used
+				usedLetter = myHang.letterWasUsed(currentLetter);	
+				
+				
 			} while (usedLetter);
 			  boolean newLetter = false;
-			  
+
+/** >>>> made correction from starWord.charAt(i) to word[randomWord].charAt(i) <<<<< */
 			//convert the word to char Array and check if the letter is in the word
 				char[] showLettersInTheWord = word[randomWord].toCharArray();
 				for(char i=0; i<showLettersInTheWord.length; i++) {
-					if(starWord.charAt(i) == currentLetter) {
+					if(word[randomWord].charAt(i) == currentLetter) {
 						showLettersInTheWord[i] = currentLetter;
 						newLetter = true;
 					}
@@ -109,12 +113,12 @@ public class HangmanApp {
 						lives--;
 					} myHang.usedLettersLine(currentLetter);
 			
-			    gameFinished = true;
+/** >>>> deleted boolean with changed value <<<<< */
 			    //if there are still *** in the word the game is not finished
 				for (char i=0; i<word[randomWord].length(); i++) {
 					if (word[randomWord].charAt(i) == '*') {
-						gameFinished = false;
-						}
+						gameFinished = true;
+						} 
 					}
 		}
 					
@@ -123,8 +127,10 @@ public class HangmanApp {
 						gamesLost++;
 						System.out.println("GAME OVER! The word was: " + word[randomWord]);
 						System.out.println();
-			
-					}else {
+
+/** >>>> added parameters <<<<< */
+						
+					}else if (lives>0 || gameFinished){
 						gamesWon++;
 						System.out.println("Congratulations! The word was: " + word[randomWord]);
 					}
@@ -134,10 +140,9 @@ public class HangmanApp {
 					System.out.println("Games won: " + gamesWon);
 		  
 	   //ask if the user would like to play again 
-	  
-	        
 	     System.out.println("Would you like to play again (yes/no)?");
 			agree = sc.next().toLowerCase();
+
 		
 		} while (agree.contentEquals("yes"));	
 	   if (agree.equals("no")) {
