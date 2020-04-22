@@ -79,7 +79,7 @@ public class HangmanApp {
 				
 			}
 		 
-			//add value to the variable "currentLetter" and add boolean for used letter
+			//add value to the variable "currentLetter" and add a variable of type boolean for used letter
 			currentLetter = ' '; 
 			boolean usedLetter = false;
 			
@@ -143,7 +143,7 @@ public class HangmanApp {
 		  
 	    //ask if the user would like to play again 
 	    System.out.println("Would you like to play again (yes/no)?");
-		//input form the user   
+		//input from the user   
 	    agree = sc.next().toLowerCase();
 
 		//if the answer is "yes" the game starts again
