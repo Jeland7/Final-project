@@ -29,46 +29,42 @@ public class HangmanLetters {
 	
 	//method to convert letters to *** by using StringBuffer
 	public String convertStars(String word) {
-	for(int i = 0; i < word.length(); i++) {
-		if(word.charAt(i) == ' ') {
+		for(int i = 0; i < word.length(); i++) {
+			if(word.charAt(i) == ' ') {
 			sb.append(' ');
-		} else {
+		  } else {
 			sb.append('*');
-		}
-	}return sb.toString();
+		  }
+		}return sb.toString();
 	}
 	
-	/**>>>> added getter method for length<<<<<*/
 	
-	//getter
+	//getter method
 	public int getLength() {
 		return letters.length();
 	}
 	
-	//method to show letters which were used
-	public void showUsedLetters() {
-		for (char i = 0; i < letters.length(); i++) {
-			System.out.println("Used letters: " + letters.charAt(i)); 
-		}
+	//method to check if letter has been used
+	public boolean letterWasUsed(char letter) {
+		for(char i = 0; i < letters.length(); i++) {
+			if (letters.charAt(i) == letter) {
+				return true;
+			}
+		} return false;
 	}
 	
-	//method to check if letter has been used
-			public boolean letterWasUsed(char letter) {
-			for(char i = 0; i < letters.length(); i++) {
-				if (letters.charAt(i) == letter) {
-					return true;
-				}
+	//method to show letters which were already used
+		public void showUsedLetters() {
+			for (char i = 0; i < letters.length(); i++) {
+				System.out.println("Used letters: " + letters.charAt(i)); 
 			}
-				return false;
-			}
+		}
 	
 	//method to add a letter to the line of used letters
 	public void usedLettersLine(char nextLetter) {
 		letters = letters + nextLetter;
 		char[] lettersArray = letters.toCharArray();
 		letters = String.copyValueOf(lettersArray);
-		
-		
 	}
 
 	

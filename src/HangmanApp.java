@@ -18,57 +18,58 @@ import java.util.Scanner;
 
 public class HangmanApp {
 
+	//declare main method
 	public static void main(String[] args) {
 		
-		//declare local variables
-		int lives; 	
-		int gamesWon = 0;
-		int gamesLost = 0;
-		String agree = "yes";
-		String starWord;
-		String letters = "";
-		char currentLetter;
+	//declare local variables
+	int lives; 	
+	int gamesWon = 0;
+	int gamesLost = 0;
+	String agree = "yes";
+	String starWord;
+	char currentLetter;
 		
-		String word[] = {"Bahamas", "Bahrain", "Barbados", "Brunei", "Comoros", "Cuba",
+	String word[] = {"Bahamas", "Bahrain", "Barbados", "Brunei", "Comoros", "Cuba",
 				"Cyprus", "Dominica", "Fiji", "Haiti", "Iceland", "Jamaica", "Japan", "Madagascar", 
 				"Maldives", " Malta", "Mauritius", "Philippines",
 				"Seychelles", "Singapore", "Taiwan", "Tonga", "Vanuatu"};
 		
+		
+		
+	//output to start
+	System.out.println("<<<<<< Welcome to the game! >>>>>>");
+	System.out.println("The theme of the game is - Island Countries!");
+	System.out.println();
+		
+		
+		
+	do {
+			
 		//declare an object
-	    HangmanLetters myHang = new HangmanLetters();
+		HangmanLetters myHang = new HangmanLetters();
 		
-		//output to start
-		System.out.println("<<<<<< Welcome to the game! >>>>>>");
-		System.out.println("The theme of the game is Island Countries!");
-		System.out.println();
-		
-		
-		
-		do {
-		
-		//input Scanner
+		//input Scanner to start the game
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Press ENTER to START: ");
 		sc.nextLine();
 		
-		//generating random word from String[]
+		//generating random word from String Array
 	    Random r = new Random();
 	    int randomWord = r.nextInt(word.length);
 	    
-	    //convert letters to ***
+	    //convert letters of the random word to *** using method from instantiable class
 	    starWord = myHang.convertStars(word[randomWord]);					
 	    
-	    
-	    //declare amount of lives
+	    //add value for variable "lives" and add a variable of type boolean for finished game
 		lives = 8;
 		boolean gameFinished = false;
 		
+		//the loop which shows the word and lives until the game is not finished
 		while (lives > 0 && !gameFinished) {
 			System.out.println("Word: " + starWord);
 			System.out.println("Lives: " + lives);
-			System.out.println("Used letters: ");
-
-/** >>>> added getter <<<<< */		
+			
+			//show whether the letter was used before using method from instantiable class 
 			if (myHang.getLength() == 0) {
 				System.out.println(" no letters used yet");
 				System.out.println();
@@ -78,76 +79,81 @@ public class HangmanApp {
 				
 			}
 		 
+			//add value to the variable "currentLetter" and add boolean for used letter
 			currentLetter = ' '; 
 			boolean usedLetter = false;
 			
-			do {
-				
-				if (usedLetter) {
-					System.out.println("The letter " + "<<" + currentLetter + ">>"+ " was used!");
-				}
-				
-				//ask the user to guess a letter
-				System.out.println("Guess a letter: ");
-				currentLetter = sc.next().charAt(0);
+		do {
 			
-				//check if letter was used
-				usedLetter = myHang.letterWasUsed(currentLetter);	
+			//show message if the letter was used
+			if (usedLetter) {
+			System.out.println("The letter " + "<<" + currentLetter + ">>"+ " was used!");
+			}
+				
+			//ask the user to guess a letter
+			System.out.println("Guess a letter: ");
+			//user input
+			currentLetter = sc.next().charAt(0);
+			System.out.println();
+			
+			//check if the letter was used by using method from instantiable class
+			usedLetter = myHang.letterWasUsed(currentLetter);	
 				
 				
 			} while (usedLetter);
 			  boolean newLetter = false;
 
-/** >>>> made correction from starWord.charAt(i) to word[randomWord].charAt(i) <<<<< */
-			//convert the word to char Array and check if the letter is in the word
-				char[] showLettersInTheWord = starWord.toCharArray();
-				for(char i=0; i<showLettersInTheWord.length; i++) {
+			//convert the word to char Array to check if the letter is in the word
+			char[] showLettersInTheWord = starWord.toCharArray(); //convert to char Array
+				for(char i=0; i<showLettersInTheWord.length; i++) { //check if the letter is in the word
 					if(Character.toLowerCase(word[randomWord].charAt(i)) == currentLetter) {
 						showLettersInTheWord[i] = currentLetter;
 						newLetter = true;
 					}
-				//return the word from char Array
+				//return the word from char Array back to String
 				} starWord = String.copyValueOf(showLettersInTheWord);
 				
-				//minus life if the letter is not guessed
-					if(!newLetter) {
-						lives--;
-					} myHang.usedLettersLine(currentLetter);
+			//minus life if the letter is not in the word
+			if(!newLetter) {
+				lives--;
+			}   myHang.usedLettersLine(currentLetter);
 			
-/** >>>> deleted boolean with changed value <<<<< */
-			    //if there are still *** in the word the game is not finished
-				for (char i=0; i<word[randomWord].length(); i++) {
-					if (Character.toLowerCase(word[randomWord].charAt(i)) == '*') {
-						gameFinished = true;
-						} 
-					}
+			//if there are still *** in the word the game is not finished
+			if (!starWord.contains("*")) {
+				gameFinished = true;
+						 
+			}
 		}
 					
-			    //the game is lost if there are no more lives
-					if (lives == 0) {
-						gamesLost++;
-						System.out.println("GAME OVER! The word was: " + word[randomWord]);
-						System.out.println();
-						
-					}else if (lives > 0 && !gameFinished) {
-						gamesWon++;
-						System.out.println("Congratulations! The word was: " + word[randomWord]);
-						System.out.println();
-					}
-					//show statistics
-					System.out.println("Statistics: ");
-					System.out.println("Games lost: " + gamesLost);
-					System.out.println("Games won: " + gamesWon);
+		   //the game is lost if there are no more lives
+		   if (lives == 0 && !gameFinished) {
+			  gamesLost++;
+			  System.out.println("GAME OVER! The word was: " + word[randomWord]);
+			  System.out.println();
+		   }else {
+			  gamesWon++;
+			  System.out.println("Congratulations! The word was: " + word[randomWord]);
+			  System.out.println();
+		   }
+					
+		   //show statistics to the user
+		   System.out.println("Statistics: ");
+		   System.out.println("Games lost: " + gamesLost);
+		   System.out.println("Games won: " + gamesWon);
 		  
-	   //ask if the user would like to play again 
-	     System.out.println("Would you like to play again (yes/no)?");
-			agree = sc.next().toLowerCase();
+	    //ask if the user would like to play again 
+	    System.out.println("Would you like to play again (yes/no)?");
+		//input form the user   
+	    agree = sc.next().toLowerCase();
 
-		
+		//if the answer is "yes" the game starts again
 		} while (agree.equalsIgnoreCase("yes"));	
-	   if (agree.equalsIgnoreCase("no")) {
+		
+		//if the answer is "no" the program is finished
+	      if (agree.equalsIgnoreCase("no")) {
 			System.out.println("Thank you for the game!");
-			System.out.println();}
+			System.out.println();
+		  }
 	
 		
 	
