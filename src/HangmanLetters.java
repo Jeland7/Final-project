@@ -16,59 +16,58 @@
 
 
 public class HangmanLetters {
-	//declare a local variable
-	private String letters = "";
-	
-	
-	//constructor without parameters
-	public HangmanLetters() {
-	}
-	
-	//StringBuffer 
-	StringBuffer sb = new StringBuffer();
-	
-	//method to convert letters to *** by using StringBuffer
-	public String convertStars(String word) {
-		for(int i = 0; i < word.length(); i++) {
-			if(word.charAt(i) == ' ') {
-			sb.append(' ');
-		  } else {
-			sb.append('*');
-		  }
-		}return sb.toString();
-	}
-	
-	
-	//getter method
-	public int getLength() {
-		return letters.length();
-	}
-	
-	//method to check if letter has been used
-	public boolean letterWasUsed(char letter) {
-		for(char i = 0; i < letters.length(); i++) {
-			if (letters.charAt(i) == letter) {
-				return true;
-			}
-		} return false;
-	}
-	
-	//method to show letters which were already used
-		public void showUsedLetters() {
-			for (char i = 0; i < letters.length(); i++) {
-				System.out.println("Used letters: " + letters.charAt(i)); 
-			}
-		}
-	
-	//method to add a letter to the line of used letters
-	public void usedLettersLine(char nextLetter) {
-		letters = letters + nextLetter;
-		char[] lettersArray = letters.toCharArray();
-		letters = String.copyValueOf(lettersArray);
-	}
+    //declare a local variable
+    private String letters = "";
 
-	
-	
-	
-	
+
+    //constructor without parameters
+    public HangmanLetters() {
+    }
+
+    //StringBuffer
+    StringBuffer sb = new StringBuffer();
+
+    //method to convert letters to *** by using StringBuffer
+    public String convertStars(String word) {
+        for (int i = 0; i < word.length(); i++) {
+            if (word.charAt(i) == ' ') {
+                sb.append(' ');
+            } else {
+                sb.append('*');
+            }
+        }
+        return sb.toString();
+    }
+
+
+    //getter method
+    public int getLength() {
+        return letters.length();
+    }
+
+    //method to check if letter has been used
+    public boolean letterWasUsed(char letter) {
+        for (char i = 0; i < letters.length(); i++) {
+            if (letters.charAt(i) == letter) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //method to show letters which were already used
+    public void showUsedLetters() {
+        for (char i = 0; i < letters.length(); i++) {
+            System.out.println("Used letters: " + letters.charAt(i));
+        }
+    }
+
+    //method to add a letter to the line of used letters
+    public void usedLettersLine(char nextLetter) {
+        letters = letters + nextLetter;
+        char[] lettersArray = letters.toCharArray();
+        letters = String.copyValueOf(lettersArray);
+    }
+
+
 }//end class
