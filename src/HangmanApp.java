@@ -67,7 +67,7 @@ public class HangmanApp {
                 System.out.println("Word: " + starWord);
                 System.out.println("Lives: " + lives);
 
-                //show whether the letter was used before using method from instantiable class
+                //show used letters by using method from instantiable class
                 if (myHang.getLength() == 0) {
                     System.out.println(" no letters used yet");
                     System.out.println();
@@ -108,14 +108,14 @@ public class HangmanApp {
                         showLettersInTheWord[i] = currentLetter;
                         newLetter = true;
                     }
-                    //return the word from char Array back to String
-                }
+                    
+                }//return the word from char Array back to String
                 starWord = String.copyValueOf(showLettersInTheWord);
 
                 //minus life if the letter is not in the word
                 if (!newLetter) {
                     lives--;
-                }
+                } //add a letter to the line of used letters
                 myHang.usedLettersLine(currentLetter);
 
                 //if there are still *** in the word the game is not finished
